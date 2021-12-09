@@ -27,7 +27,6 @@ public class User implements Serializable {
     private LocalDate birthDate;
 
     //Relaciones
-
     /**
      * Un usuario tiene una informacion de facturacion(BillingInfo)
      * y una BillingInfo solo puede pertenecer a un usuario
@@ -96,6 +95,14 @@ public class User implements Serializable {
 
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
+    }
+
+    public BillingInfo getBillingInfo() {
+        return billingInfo;
+    }
+
+    public void setBillingInfo(BillingInfo billingInfo) {
+        this.billingInfo = billingInfo;
     }
 
     //toString
