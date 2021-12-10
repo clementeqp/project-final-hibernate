@@ -1,9 +1,13 @@
 package com.clemen.proyecto.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -31,9 +35,25 @@ public class User implements Serializable {
      * Un usuario tiene una informacion de facturacion(BillingInfo)
      * y una BillingInfo solo puede pertenecer a un usuario
      */
+    // Nos crea un bucle entre las asociaciones infinito stack overflow
+    // Ignoramos la propiedad users para que no siga serializando
+    @JsonIgnoreProperties("user")
     @OneToOne
     @JoinColumn(name = "billing_info_id", unique = true)
     private BillingInfo billingInfo;
+
+    // Asociacion
+
+    /**
+     * Un usuario tiene muchas tareas, una tarea solo un usuario
+     * OnetoMany
+     */
+
+    // Nos crea un bucle entre las asociaciones infinito stack overflow
+    // Ignoramos la propiedad users para que no siga serializando
+    @JsonIgnoreProperties("user")
+    @OneToMany(mappedBy="user")
+    private List<Task> task = new ArrayList<>();
 
     //Constructor vacio
     public User() {
@@ -103,6 +123,14 @@ public class User implements Serializable {
 
     public void setBillingInfo(BillingInfo billingInfo) {
         this.billingInfo = billingInfo;
+    }
+
+    public List<Task> getTask() {
+        return task;
+    }
+
+    public void setTask(List<Task> task) {
+        this.task = task;
     }
 
     //toString
