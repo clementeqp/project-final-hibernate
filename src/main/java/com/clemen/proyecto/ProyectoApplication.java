@@ -32,7 +32,7 @@ public class ProyectoApplication {
 		billingInfoRepository.save(info2);
 
 		User user1 = new User(null, "Clemen", "Pozo", "78787878H", true, LocalDate.of(1975, 12,3));
-		User user2 = new User(null, "Alex", "Gomez", "78745878H", true, LocalDate.of(1978, 12,3));
+		User user2 = new User(null, "Alex", "Gomez", "78745878H", false, LocalDate.of(1978, 12,3));
 		user1.setBillingInfo(info1);
 		user2.setBillingInfo(info2);
 		userRepository.save(user1);
